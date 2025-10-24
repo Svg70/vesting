@@ -30,12 +30,12 @@ async function main() {
   const token = await hre.viem.getContractAt("IERC20", tokenAddress);
   
   // Check deployer's native token balance
-  try {
-    const tokenBalance = await token.read.balanceOf([deployer.account.address]) as bigint;
-    console.log("Deployer native token balance:", formatEther(tokenBalance), "tokens\n");
-  } catch (error) {
-    console.log("Note: If balance check fails, make sure the native collection is properly configured\n");
-  }
+  // try {
+  //   //const tokenBalance = await token.read.balanceOf([deployer.account.address]) as bigint;
+  //   //console.log("Deployer native token balance:", formatEther(tokenBalance), "tokens\n");
+  // } catch (error) {
+  //   console.log("Note: If balance check fails, make sure the native collection is properly configured\n");
+  // }
 
   // ============================================
   // STEP 1: Deploy Vesting Contract
@@ -107,17 +107,17 @@ async function main() {
   console.log("Native collection address (0x0) requires special handling in Unique Network");
   
   // Amount to donate (should be at least equal to total allocation)
-  const donationAmount = totalAllocation + parseEther("10"); // Total allocation + 10 extra tokens
+  const donationAmount = totalAllocation + parseEther("10");  
   
   try {
     // Check current allowance for native collection
-    const currentAllowance = await token.read.allowance([
-      deployer.account.address,
-      vestingAddress
-    ]) as bigint;
-    console.log("Current allowance:", formatEther(currentAllowance), "tokens");
+    // const currentAllowance = await token.read.allowance([
+    //   deployer.account.address,
+    //   vestingAddress
+    // ]) as bigint;
+    // console.log("Current allowance:", formatEther(currentAllowance), "tokens");
     
-    if (currentAllowance < donationAmount) {
+    if (true) {
       // Approve the vesting contract to spend native tokens
       console.log("Approving", formatEther(donationAmount), "native tokens...");
       
@@ -152,13 +152,13 @@ async function main() {
   
   try {
     // Check vesting contract token balance before donation
-    const vestingBalanceBefore = await token.read.balanceOf([vestingAddress]) as bigint;
-    console.log("Vesting contract balance before:", formatEther(vestingBalanceBefore), "tokens");
+    //const vestingBalanceBefore = await token.read.balanceOf([vestingAddress]) as bigint;
+   // console.log("Vesting contract balance before:", formatEther(vestingBalanceBefore), "tokens");
     
     // Donate native tokens
     console.log("Donating", formatEther(donationAmount), "native tokens...");
     
-    const donateHash = await vesting.write.donate([donationAmount]);
+    const donateHash = await vesting.write.donate([parseEther("25")]);
     
     console.log("Donate transaction hash:", donateHash);
     
@@ -170,8 +170,8 @@ async function main() {
     console.log("✅ Donation confirmed in block:", donateReceipt.blockNumber);
     
     // Check balance after donation
-    const vestingBalanceAfter = await token.read.balanceOf([vestingAddress]) as bigint;
-    console.log("Vesting contract balance after:", formatEther(vestingBalanceAfter), "tokens\n");
+    //const vestingBalanceAfter = await token.read.balanceOf([vestingAddress]) as bigint;
+    //console.log("Vesting contract balance after:", formatEther(vestingBalanceAfter), "tokens\n");
   } catch (error) {
     console.error("Error donating native tokens:", error);
     console.log("\n⚠️  Make sure the approval was successful!");
