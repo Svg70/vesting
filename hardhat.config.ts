@@ -8,7 +8,7 @@ const accounts = [process.env.PRODUCTION_PRIVATE_KEY].filter((x): x is string =>
 
 const config: HardhatUserConfig = {
   solidity: {
-    version: "0.8.29",
+    version: "0.8.20",
     settings: {
       optimizer: {
         enabled: true,
