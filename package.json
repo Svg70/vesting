@@ -1,0 +1,40 @@
+{
+  "name": "vesting-project",
+  "version": "1.0.0",
+  "description": "Vesting contract deployment project",
+  "main": "index.js",
+  "packageManager": "pnpm@8.15.4",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts --network localhost",
+    "deploy:test": "hardhat run scripts/deploy.ts --network hardhat",
+    "deploy:unique": "hardhat run scripts/deploy.ts --network unique",
+    "deploy:devnode": "hardhat run scripts/deploy.ts --network devnode",
+    "node": "hardhat node"
+  },
+  "keywords": [
+    "vesting",
+    "solidity",
+    "ethereum"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.3.11",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^24.9.1",
+    "chai": "^4.3.7",
+    "hardhat": "^2.26.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-toolbox-viem": "^3.0.0",
+    "@nomicfoundation/hardhat-viem": "^2.1.1",
+    "@openzeppelin/contracts": "^4.9.6",
+    "dotenv": "^17.2.3",
+    "ethers": "^6.15.0",
+    "viem": "^2.38.4"
+  }
+}
